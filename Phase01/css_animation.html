@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class 08 - CSS Transitions, Transforms and Animations</title>
+
+  <!-- INTERNAL CSS: write CSS inside the style tag in the head. -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7f8;
+      color: #222;
+      line-height: 1.5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1, h2 { color: #00444d; }
+    h1 { margin-bottom: 4px; }
+
+    section {
+      background: white;
+      padding: 18px;
+      margin: 18px 0;
+      border: 1px solid #dfe8e9;
+      border-radius: 10px;
+    }
+
+    .note { color: #555; }
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    pre {
+      background: #f1f5f6;
+      padding: 12px;
+      border-radius: 7px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    code { font-family: Consolas, monospace; font-size: 14px; }
+
+    /* BUTTON: transition makes the colour change smooth. */
+    .demo-button {
+      background: #00444d;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .demo-button:hover { background-color: #00717d; }
+    .demo-button:active { transform: scale(0.97); }
+
+    /* Shared style for transform examples. */
+    .demo-box {
+      display: inline-block;
+      padding: 16px;
+      background: #d8f3f0;
+      color: #00444d;
+      border-radius: 6px;
+      transition: transform 0.3s ease;
+    }
+    .scale-box:hover { transform: scale(1.1); }
+    .move-box:hover { transform: translateX(15px); }
+    .rotate-box:hover { transform: rotate(5deg); }
+    .skew-box:hover { transform: skew(5deg); }
+
+    /* Cards lift up when hovered. */
+    .cards { display: flex; flex-wrap: wrap; gap: 14px; }
+    .card {
+      width: 210px;
+      box-sizing: border-box;
+      padding: 18px;
+      border: 1px solid #e1e8e9;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 3px 8px #00000018;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 16px #00000025;
+    }
+    .card h3 { color: #00444d; margin-top: 0; }
+
+    /* Animation 1: fade from invisible to visible. */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .fade-box {
+      padding: 16px;
+      border-radius: 6px;
+      color: white;
+      background: #00444d;
+      animation: fadeIn 1.5s ease;
+    }
+
+    /* Animation 2: change colour at the start, middle and end. */
+    @keyframes changeColor {
+      0% { background-color: #00444d; }
+      50% { background-color: #00a3ad; }
+      100% { background-color: #00444d; }
+    }
+    .color-box {
+      padding: 16px;
+      border-radius: 6px;
+      color: white;
+      background-color: #00444d;
+      animation: changeColor 3s infinite;
+    }
+
+    /* Animation 3: move up and down. */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .bounce-box {
+      padding: 16px;
+      background: #d8f3f0;
+      color: #00444d;
+      border-radius: 6px;
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+
+    /* Image zoom: overflow hidden keeps the zoom inside the box. */
+    .image-card {
+      width: 260px;
+      max-width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    .image-card img {
+      display: block;
+      width: 100%;
+      height: 155px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .image-card:hover img { transform: scale(1.08); }
+
+    @media (max-width: 600px) {
+      body { padding: 10px; }
+      section { padding: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Transitions, Transforms & Animations</h1>
+  <p class="note">Class 08 beginner practice — hover over the examples, then read the code below each demo.</p>
+
+  <section>
+    <h2>1. Inline CSS and Internal CSS</h2>
+    <p style="color: #00717d; font-weight: bold;">This paragraph is styled using inline CSS.</p>
+    <p>Inline CSS is written in the HTML tag's <code>style</code> attribute. Internal CSS is written inside a <code>&lt;style&gt;</code> tag in the <code>&lt;head&gt;</code>.</p>
+
+    <b>Inline CSS example:</b>
+    <pre><code>&lt;p style="color: teal; font-weight: bold;"&gt;
+  Hello students!
+&lt;/p&gt;</code></pre>
+
+    <b>Internal CSS example:</b>
+    <pre><code>&lt;style&gt;
+  p {
+    color: teal;
+    font-weight: bold;
+  }
+&lt;/style&gt;</code></pre>
+    <p class="note">Inline CSS styles one element directly. Internal CSS can style many matching elements on the same page.</p>
+  </section>
+
+  <section>
+    <h2>2. Button Hover and Transition</h2>
+    <button class="demo-button">Hover over me</button>
+    <p>Move your mouse over the button. Click it to see the small press effect.</p>
+    <pre><code>.demo-button {
+  background-color: #00444d;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.demo-button:hover {
+  background-color: #00717d;
+}
+
+.demo-button:active {
+  transform: scale(0.97);
+}</code></pre>
+    <p class="note"><b>Remember:</b> <code>:hover</code> works when the pointer is over an element. <code>:active</code> applies while it is being clicked. <code>0.3s</code> means 0.3 seconds.</p>
+  </section>
+
+  <section>
+    <h2>3. Transition Duration, Delay and Timing</h2>
+    <p>Duration controls how long the change takes. Delay controls how long it waits before starting. The timing function controls the speed pattern.</p>
+    <div class="demo-row">
+      <div class="demo-box" style="transition: transform 0.3s linear;" onmouseover="this.style.transform='translateX(15px)'" onmouseout="this.style.transform='translateX(0)'">linear</div>
+      <div class="demo-box" style="transition: transform 0.8s ease;" onmouseover="this.style.transform='translateX(15px)'" onmouseout="this.style.transform='translateX(0)'">ease</div>
+      <div class="demo-box" style="transition: transform 0.5s ease 0.3s;" onmouseover="this.style.transform='translateX(15px)'" onmouseout="this.style.transform='translateX(0)'">0.3s delay</div>
+    </div>
+    <pre><code>/* Takes half a second */
+transition: transform 0.5s;
+
+/* Starts after a 0.3 second delay */
+transition: transform 0.5s ease 0.3s;
+
+/* Common timing values */
+transition: transform 0.5s linear;
+transition: transform 0.5s ease;</code></pre>
+    <p class="note">Common timing values: <code>linear</code> = steady speed; <code>ease</code> = starts and finishes gently; <code>ease-in</code> = starts slowly; <code>ease-out</code> = finishes slowly.</p>
+  </section>
+
+  <section>
+    <h2>4. Transform: Scale, Move, Rotate and Skew</h2>
+    <p>Hover over each box to see how <code>transform</code> changes its appearance.</p>
+    <div class="demo-row">
+      <div class="demo-box scale-box">Scale</div>
+      <div class="demo-box move-box">Move</div>
+      <div class="demo-box rotate-box">Rotate</div>
+      <div class="demo-box skew-box">Skew</div>
+    </div>
+    <pre><code>.demo-box {
+  transition: transform 0.3s ease;
+}
+
+.scale-box:hover  { transform: scale(1.1); }
+.move-box:hover   { transform: translateX(15px); }
+.rotate-box:hover { transform: rotate(5deg); }
+.skew-box:hover   { transform: skew(5deg); }</code></pre>
+    <ul>
+      <li><code>scale(1.1)</code> — makes the element a little bigger.</li>
+      <li><code>translateX(15px)</code> — moves it right by 15 pixels.</li>
+      <li><code>rotate(5deg)</code> — rotates it by 5 degrees.</li>
+      <li><code>skew(5deg)</code> — slants it.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. Simple Course Card Hover Effect</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>HTML</h3>
+        <p>Learn webpage structure.</p>
+        <button class="demo-button">Explore</button>
+      </div>
+      <div class="card">
+        <h3>CSS</h3>
+        <p>Learn styling and effects.</p>
+        <button class="demo-button">Explore</button>
+      </div>
+    </div>
+    <pre><code>.card {
+  box-shadow: 0 3px 8px #00000018;
+  transition: transform 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px #00000025;
+}</code></pre>
+    <p class="note">The card moves up by 6 pixels. Its shadow becomes stronger. Multiple properties can be listed in one <code>transition</code>, separated by commas.</p>
+  </section>
+
+  <section>
+    <h2>6. Keyframes Animation</h2>
+    <div class="demo-row">
+      <div class="fade-box">Fade in once</div>
+      <div class="color-box">Changing colour</div>
+      <div class="bounce-box">Bounce</div>
+    </div>
+    <pre><code>/* Fade in: invisible to visible */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fade-box {
+  animation: fadeIn 1.5s ease;
+}
+
+/* Change colour in three stages */
+@keyframes changeColor {
+  0%   { background-color: #00444d; }
+  50%  { background-color: #00a3ad; }
+  100% { background-color: #00444d; }
+}
+
+.color-box {
+  animation: changeColor 3s infinite;
+}
+
+/* Move up and down */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+.bounce-box {
+  animation: bounce 1.5s infinite;
+}</code></pre>
+    <p class="note"><code>@keyframes</code> defines the animation steps. <code>from</code> and <code>to</code> mean start and end. Percentages allow middle steps. <code>infinite</code> repeats the animation continuously.</p>
+  </section>
+
+  <section>
+    <h2>7. Image Zoom on Hover</h2>
+    <div class="image-card">
+      <img src="shivansh.png" alt="Laptop and web development workspace">
+    </div>
+    <pre><code>.image-card {
+  overflow: hidden;
+}
+
+.image-card img {
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.image-card:hover img {
+  transform: scale(1.08);
+}</code></pre>
+    <p class="note">The image zooms in when hovered. <code>overflow: hidden</code> hides the part that goes outside the image box. The sample image requires an internet connection.</p>
+  </section>
+
+  <section>
+    <h2>8. Quick Recap</h2>
+    <ul>
+      <li><code>style="..."</code> — inline CSS, written inside an HTML element.</li>
+      <li><code>&lt;style&gt;</code> — internal CSS, written in the HTML head.</li>
+      <li><code>:hover</code> — style applied when the pointer is over an element.</li>
+      <li><code>:active</code> — style applied while an element is being activated.</li>
+      <li><code>transition</code> — makes a property change happen smoothly.</li>
+      <li><code>transform</code> — moves, scales, rotates or slants an element.</li>
+      <li><code>@keyframes</code> — defines the stages of an animation.</li>
+      <li><code>animation-duration</code> — sets how long one animation cycle takes.</li>
+      <li><code>animation-iteration-count</code> — sets how many times an animation repeats; <code>infinite</code> repeats forever.</li>
+    </ul>
+    <p class="note"><b>Teaching tip:</b> Change one value at a time (such as <code>0.3s</code>, <code>scale(1.1)</code>, or <code>translateY(-6px)</code>) and ask students to predict what will happen.</p>
+  </section>
+
+</body>
+</html>

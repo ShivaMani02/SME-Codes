@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Grid Playground — Class 07</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071316;
+      --panel: #0d2024;
+      --line: #214147;
+      --teal: #45d6c5;
+      --muted: #9bb6b9;
+      --text: #edf8f7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at top right, #12363a 0, transparent 42%), var(--bg);
+      color: var(--text);
+      font: 15px/1.5 system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+
+    header {
+      padding: 26px clamp(16px, 4vw, 48px) 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      font-size: 12px;
+      letter-spacing: .16em;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 6px 0 5px;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.1;
+    }
+
+    header p {
+      color: var(--muted);
+      margin: 8px 0 0;
+      max-width: 800px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+      gap: 18px;
+      padding: 20px clamp(12px, 3vw, 36px) 36px;
+      max-width: 1600px;
+      margin: auto;
+    }
+
+    .panel {
+      background: rgba(13, 32, 36, .94);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      min-width: 0;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+    }
+
+    .control {
+      margin: 0 0 16px;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: #d5e8e8;
+      font-weight: 650;
+      margin-bottom: 7px;
+      font-size: 13px;
+    }
+
+    output {
+      color: var(--teal);
+      font-variant-numeric: tabular-nums;
+    }
+
+    select,
+    input[type="number"] {
+      width: 100%;
+      background: #071619;
+      color: var(--text);
+      border: 1px solid #31565b;
+      border-radius: 8px;
+      padding: 9px 10px;
+      font: inherit;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+    }
+
+    .checks {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .checks button,
+    .tabs button {
+      background: #102a2f;
+      border: 1px solid #31565b;
+      color: var(--text);
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button.active {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .right {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+      min-width: 0;
+    }
+
+    .stage-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .stage-head h2 {
+      margin: 0;
+    }
+
+    .device {
+      width: 100%;
+      max-width: 100%;
+      margin: auto;
+      border: 1px solid #3c6267;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #071619;
+      transition: max-width .2s;
+    }
+
+    .browserbar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #47666a;
+    }
+
+    .browserbar span:last-child {
+      margin-left: auto;
+    }
+
+    .preview {
+      padding: 16px;
+      min-height: 270px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      align-content: start;
+    }
+
+    .tile {
+      min-height: 84px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border: 1px solid #3b7a80;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #17434a, #102d33);
+      color: #e9ffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tile strong {
+      font-size: 14px;
+    }
+
+    .tile small {
+      color: #a7d5d6;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .tile.feature {
+      background: linear-gradient(135deg, #17635e, #17434a);
+      border-color: var(--teal);
+    }
+
+    .tile .number {
+      position: absolute;
+      top: 5px;
+      left: 7px;
+      font-size: 10px;
+      color: #75c9c6;
+    }
+
+    .legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: #17434a;
+      border: 1px solid #3b7a80;
+    }
+
+    .swatch.feature {
+      background: #17635e;
+      border-color: var(--teal);
+    }
+
+    .lower {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    pre {
+      margin: 0;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #061114;
+      color: #bdebe5;
+      overflow: auto;
+      font: 12px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace;
+      white-space: pre;
+    }
+
+    .explain {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .concepts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .concept {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #0a1a1e;
+    }
+
+    .concept strong {
+      display: block;
+      color: var(--teal);
+      margin-bottom: 4px;
+    }
+
+    .concept p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .tip {
+      border-left: 3px solid var(--teal);
+      padding: 10px 12px;
+      background: #102a2d;
+      border-radius: 0 8px 8px 0;
+      color: #cde7e5;
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .area-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-areas: "header header" "nav nav" "main sidebar" "footer footer";
+      gap: 8px;
+    }
+
+    .area-layout>div {
+      padding: 14px 8px;
+      text-align: center;
+      border-radius: 8px;
+      border: 1px solid #3b7a80;
+      background: #12353a;
+      color: #e9ffff;
+      font-size: 12px;
+    }
+
+    .area-layout .a-header {
+      grid-area: header;
+      background: #17635e;
+    }
+
+    .area-layout .a-nav {
+      grid-area: nav;
+    }
+
+    .area-layout .a-main {
+      grid-area: main;
+      min-height: 90px;
+    }
+
+    .area-layout .a-sidebar {
+      grid-area: sidebar;
+    }
+
+    .area-layout .a-footer {
+      grid-area: footer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 0 16px 26px;
+      color: #78999c;
+      font-size: 12px;
+    }
+
+    @media(max-width:900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .lower {
+        grid-template-columns: 1fr;
+      }
+
+      .concepts {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:480px) {
+      .concepts {
+        grid-template-columns: 1fr;
+      }
+
+      .preview {
+        padding: 10px;
+      }
+
+      .tile {
+        min-height: 70px;
+        padding: 7px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="eyebrow">Full Stack Web Development with GenAI · Class 07</div>
+    <h1>CSS Grid Playground</h1>
+    <p>Change the controls and watch the layout respond. Use this in class to explain columns, <code>fr</code>, gaps,
+      spanning, alignment and responsive breakpoints — all in one HTML file.</p>
+  </header>
+  <main>
+    <aside class="panel">
+      <h2>🎛️ Grid controls</h2>
+      <div class="control">
+        <label for="columns">Number of columns <output id="columnsOut">3</output></label>
+        <input id="columns" type="range" min="1" max="5" value="3">
+      </div>
+      <div class="control">
+        <label for="unit">Column sizing</label>
+        <select id="unit">
+          <option value="equal">repeat(n, 1fr) — equal columns</option>
+          <option value="unequal">2fr 1fr — unequal columns</option>
+          <option value="fixed">200px 1fr — fixed + flexible</option>
+        </select>
+      </div>
+      <div class="control">
+        <label for="gap">Gap <output id="gapOut">12px</output></label>
+        <input id="gap" type="range" min="0" max="32" value="12">
+      </div>
+      <div class="control">
+        <label for="items">Number of items <output id="itemsOut">8</output></label>
+        <input id="items" type="range" min="2" max="12" value="8">
+      </div>
+      <div class="control">
+        <label for="span">First item spans</label>
+        <select id="span">
+          <option value="1">1 column (normal)</option>
+          <option value="2">2 columns</option>
+          <option value="3">3 columns</option>
+        </select>
+      </div>
+      <div class="control">
+        <label for="align">Align items inside cells</label>
+        <select id="align">
+          <option value="stretch">stretch (default)</option>
+          <option value="center">center</option>
+          <option value="start">start</option>
+          <option value="end">end</option>
+        </select>
+      </div>
+      <div class="control">
+        <label for="previewWidth">Preview viewport width <output id="widthOut">900px</output></label>
+        <input id="previewWidth" type="range" min="320" max="1100" step="10" value="900">
+        <p class="explain">Simulates a screen width. Responsive columns switch at 768px and 480px.</p>
+      </div>
+      <div class="control">
+        <label for="responsive">Responsive mode</label>
+        <select id="responsive">
+          <option value="on">On — 3 / 2 / 1 columns</option>
+          <option value="off">Off — use chosen columns</option>
+          <option value="mobile">Mobile-first — 1 / 2 / 3 columns</option>
+        </select>
+      </div>
+      <div class="checks">
+        <button id="reset" type="button">Reset playground</button>
+        <button id="random" type="button">Shuffle labels</button>
+      </div>
+    </aside>
+
+    <section class="right">
+      <div class="panel">
+        <div class="stage-head">
+          <h2>👀 Live preview</h2>
+          <span class="eyebrow" id="screenLabel">Desktop · 3 columns</span>
+        </div>
+        <div class="device" id="device" style="max-width:900px">
+          <div class="browserbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span id="browserWidth">900px
+              preview</span></div>
+          <div class="preview">
+            <div class="grid" id="grid"></div>
+          </div>
+        </div>
+        <div class="legend"><span><i class="swatch feature"></i>First item / spanning item</span><span><i
+              class="swatch"></i>Regular grid item</span></div>
+        <div class="tip" id="tip">A grid container controls the layout of its direct children. Try changing the column
+          count or the gap.</div>
+      </div>
+
+      <div class="lower">
+        <div class="panel">
+          <h2>💻 CSS being applied</h2>
+          <pre id="code"></pre>
+        </div>
+        <div class="panel">
+          <h2>🧠 What to notice</h2>
+          <div class="concepts">
+            <div class="concept"><strong>Columns</strong>
+              <p>Tracks run vertically. Each column is a track between two grid lines.</p>
+            </div>
+            <div class="concept"><strong><code>fr</code></strong>
+              <p>A fraction of available space. <code>2fr 1fr</code> gives a 2:1 split.</p>
+            </div>
+            <div class="concept"><strong><code>gap</code></strong>
+              <p>Space between rows and columns; it is not extra padding inside each card.</p>
+            </div>
+            <div class="concept"><strong><code>span</code></strong>
+              <p>A grid item can occupy more than one column or row.</p>
+            </div>
+            <div class="concept"><strong>Responsive</strong>
+              <p>Media queries change the layout when the viewport crosses a breakpoint.</p>
+            </div>
+            <div class="concept"><strong>Mobile-first</strong>
+              <p>Start with one column, then add columns as the screen gets wider.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="stage-head">
+          <h2>🧩 Grid template areas</h2><span class="eyebrow">Named regions</span>
+        </div>
+        <div class="area-layout" id="areas">
+          <div class="a-header">header</div>
+          <div class="a-nav">nav</div>
+          <div class="a-main">main content</div>
+          <div class="a-sidebar">sidebar</div>
+          <div class="a-footer">footer</div>
+        </div>
+        <p class="explain" style="margin-top:12px">The strings in <code>grid-template-areas</code> act like a visual
+          map. Repeating a name makes that area span multiple cells.</p>
+        <pre style="margin-top:10px">grid-template-columns: 2fr 1fr;
+grid-template-areas:
+  "header header"
+  "nav    nav"
+  "main   sidebar"
+  "footer footer";</pre>
+      </div>
+    </section>
+  </main>
+  <footer>Teaching tip: ask students to predict the result before moving a control, then explain why the browser
+    rendered it that way.</footer>
+  <script>
+    (() => {
+      const $ = id => document.getElementById(id);
+      const labels = ['Header', 'Sidebar', 'Content', 'Card 04', 'Card 05', 'Gallery', 'Profile', 'Statistics', 'Product', 'News', 'Footer', 'Extra item'];
+      const els = ['columns', 'unit', 'gap', 'items', 'span', 'align', 'previewWidth', 'responsive'];
+      function currentColumns(width) {
+        const mode = $('responsive').value;
+        if (mode === 'on') return width <= 480 ? 1 : width <= 768 ? 2 : 3;
+        if (mode === 'mobile') return width >= 900 ? 3 : width >= 600 ? 2 : 1;
+        return Number($('columns').value);
+      }
+      function render() {
+        const count = Number($('items').value);
+        const chosenCols = Number($('columns').value);
+        const width = Number($('previewWidth').value);
+        const responsive = $('responsive').value;
+        const cols = currentColumns(width);
+        const gap = Number($('gap').value);
+        const span = Math.min(Number($('span').value), cols);
+        const unit = $('unit').value;
+        const align = $('align').value;
+        $('columnsOut').textContent = chosenCols;
+        $('gapOut').textContent = gap + 'px';
+        $('itemsOut').textContent = count;
+        $('widthOut').textContent = width + 'px';
+        $('device').style.maxWidth = width + 'px';
+        $('browserWidth').textContent = width + 'px preview';
+        $('screenLabel').textContent = (width <= 480 ? 'Mobile' : width <= 768 ? 'Tablet / small screen' : 'Desktop') + ' · ' + cols + (cols === 1 ? ' column' : ' columns');
+        const grid = $('grid');
+        grid.innerHTML = '';
+        grid.style.gap = gap + 'px';
+        grid.style.gridTemplateColumns = unit === 'unequal' && cols >= 2 ? '2fr 1fr' + (cols > 2 ? ' repeat(' + (cols - 2) + ', 1fr)' : '') :
+          unit === 'fixed' && cols >= 2 ? 'minmax(100px, 200px) minmax(0, 1fr)' + (cols > 2 ? ' repeat(' + (cols - 2) + ', 1fr)' : '') :
+            'repeat(' + cols + ', minmax(0, 1fr))';
+        grid.style.justifyItems = align;
+        grid.style.alignItems = align;
+        for (let i = 0; i < count; i++) {
+          const tile = document.createElement('div');
+          tile.className = 'tile' + (i === 0 ? ' feature' : '');
+          if (i === 0 && span > 1) tile.style.gridColumn = 'span ' + span;
+          tile.innerHTML = '<span class="number">' + (i + 1) + '</span><strong>' + labels[i % labels.length] + '</strong><small>' + (i === 0 && span > 1 ? 'grid-column: span ' + span : 'Grid item') + '</small>';
+          grid.appendChild(tile);
+        }
+        const colsCss = grid.style.gridTemplateColumns;
+        const mediaText = responsive === 'on'
+          ? '@media (max-width: 768px) { grid-template-columns: repeat(2, 1fr); }\\n@media (max-width: 480px) { grid-template-columns: 1fr; }'
+          : responsive === 'mobile'
+            ? '@media (min-width: 600px) { grid-template-columns: repeat(2, 1fr); }\\n@media (min-width: 900px) { grid-template-columns: repeat(3, 1fr); }'
+            : '/* Responsive mode is off */';
+        $('code').textContent = '.container {\\n  display: grid;\\n  grid-template-columns: ' + colsCss + ';\\n  gap: ' + gap + 'px;\\n  justify-items: ' + align + ';\\n  align-items: ' + align + ';\\n}\\n\\n.item:first-child {\\n  grid-column: span ' + span + ';\\n}\\n\\n' + mediaText;
+        let tip = 'A grid container controls the layout of its direct children. Try changing the column count or the gap.';
+        if (unit === 'unequal' && cols >= 2) tip = '2fr 1fr means the first column receives two shares of flexible space and the second receives one. The first is about twice as wide.';
+        if (unit === 'fixed' && cols >= 2) tip = 'The first column is capped at 200px (or shrinks on narrow previews); the second column takes the remaining space.';
+        if (span > 1) tip = 'The highlighted first item spans ' + span + ' columns. Grid lines mark the boundaries; tracks are the spaces between lines.';
+        if (responsive !== 'off') tip += ' Responsive mode is ' + (responsive === 'mobile' ? 'mobile-first: more columns appear as the viewport grows.' : 'desktop-first: columns reduce as the viewport narrows.') + ' Current simulated width: ' + width + 'px.';
+        $('tip').textContent = tip;
+        const areas = $('areas');
+        if (responsive === 'on' && width <= 480 || responsive === 'mobile' && width < 600) {
+          areas.style.gridTemplateColumns = '1fr';
+          areas.style.gridTemplateAreas = '"header" "nav" "main" "sidebar" "footer"';
+        } else {
+          areas.style.gridTemplateColumns = '2fr 1fr';
+          areas.style.gridTemplateAreas = '"header header" "nav nav" "main sidebar" "footer footer"';
+        }
+      }
+      els.forEach(id => $(id).addEventListener('input', render));
+      $('reset').addEventListener('click', () => {
+        const defaults = { columns: 3, unit: 'equal', gap: 12, items: 8, span: '1', align: 'stretch', previewWidth: 900, responsive: 'on' };
+        Object.entries(defaults).forEach(([id, val]) => $(id).value = val);
+        render();
+      });
+      $('random').addEventListener('click', () => {
+        const shuffled = [...labels].sort(() => Math.random() - .5);
+        document.querySelectorAll('#grid .tile strong').forEach((el, i) => el.textContent = shuffled[i % shuffled.length]);
+      });
+      render();
+    })();
+  </script>
+</body>
+
+</html>
