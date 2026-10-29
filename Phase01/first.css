@@ -474,6 +474,11 @@ textarea {
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
+
+
+/* Shivansh Vasu */
+
+
 .submit-btn {
   background: linear-gradient(135deg, var(--secondary), #16a34a);
   color: white;
