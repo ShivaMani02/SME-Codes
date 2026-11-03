@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // GLOBAL SCOPE
+         var a = 10; 
+        function hello() {
+            console.log("Hello World");
+         
+        }
+
+        hello();
+    
+
+        const sum = function (a, b) {
+            let b =10;
+            return a + b;
+            // FUNCTION SCOPE
+            {
+                let b =10;
+               // Block scope
+            }
+             console.log(b);
+        }
+
+        console.log(a);
+
+
+        sum(2, 3);
+
+        const greet = (name) => {
+            console.log(`Hello, ${name}!`);
+        }
+
+        greet("Alice");
+        greet("Bob");
+        greet("Charlie");
+
+
+        const multiply = (x, y) => x * y;
+        multiply(4, 5);
+
+
+        const square = n => n * n;
+        square(6);
+
+
+        function outerFunction() {
+            let outerVariable = "I'm from the outer function";
+
+            function innerFunction() {
+                let a = 20;
+                console.log(outerVariable);
+                console.log(a);
+            }
+        
+
+            innerFunction();
+        }
+        outerFunction();
+    </script>
+
+</body>
+
+</html>
