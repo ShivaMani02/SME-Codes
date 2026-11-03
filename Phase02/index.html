@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Essentials - Phase 02</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-wrap">
+        <span class="brand">SkillMadeEasy</span>
+        <span class="course">Full Stack Web Development with GenAI</span>
+      </div>
+      <div class="title-wrap">
+        <p class="eyebrow">CLASS-11</p>
+        <h1>JavaScript: Variables, Data Types & Operators</h1>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-text">
+          <p class="label">Core Concepts</p>
+          <h2>Variables, Types, Operators & Real Logic</h2>
+          <p>
+            JavaScript helps us make pages interactive by storing data, checking conditions,
+            and performing calculations using variables, operators, and type conversion.
+          </p>
+          <div class="quick-grid">
+            <div class="mini-card">
+              <span>let</span>
+              <strong>reassignable</strong>
+            </div>
+            <div class="mini-card">
+              <span>const</span>
+              <strong>fixed value</strong>
+            </div>
+            <div class="mini-card">
+              <span>typeof</span>
+              <strong>check type</strong>
+            </div>
+            <div class="mini-card">
+              <span>===</span>
+              <strong>strict compare</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-panel">
+          <h3>Live JS Demo</h3>
+          <div class="code-box">
+            <p><span>const</span> name = "Shivansh";</p>
+            <p><span>const</span> age = 24;</p>
+            <p><span>const</span> status = age >= 18 ? "Adult" : "Minor";</p>
+            <p>console.log(`Hi ${name}, you are ${status}.`);</p>
+          </div>
+          <button id="demoBtn" class="primary-btn">Run Demo</button>
+          <p id="demoOutput" class="output-text">Output will appear here...</p>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="info-panel">
+          <h3>Variable Examples</h3>
+          <ul>
+            <li><code>let age = 24;</code> → value can change</li>
+            <li><code>const name = "Shivansh";</code> → fixed value</li>
+            <li><code>var city = "Delhi";</code> → older style, avoid in modern code</li>
+          </ul>
+        </div>
+
+        <div class="info-panel">
+          <h3>Data Types</h3>
+          <ul>
+            <li><code>string</code> → "Hello"</li>
+            <li><code>number</code> → 25 or 99.99</li>
+            <li><code>boolean</code> → true / false</li>
+            <li><code>null</code> and <code>undefined</code> → empty or unassigned</li>
+          </ul>
+        </div>
+
+        <div class="info-panel wide">
+          <h3>Operators</h3>
+          <div class="operator-grid">
+            <div><strong>+</strong><span>10 + 5 = 15</span></div>
+            <div><strong>-</strong><span>10 - 5 = 5</span></div>
+            <div><strong>*</strong><span>10 * 5 = 50</span></div>
+            <div><strong>/</strong><span>10 / 5 = 2</span></div>
+            <div><strong>%</strong><span>10 % 3 = 1</span></div>
+            <div><strong>===</strong><span>5 === "5" → false</span></div>
+            <div><strong>&&</strong><span>true && false → false</span></div>
+            <div><strong>||</strong><span>true || false → true</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="calculator-panel">
+        <div class="section-head">
+          <p class="label">Mini Project</p>
+          <h2>Student Marks Calculator</h2>
+        </div>
+
+        <form id="marksForm" class="marks-form">
+          <div class="field-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName" placeholder="Enter student name" />
+          </div>
+
+          <div class="marks-row">
+            <div class="field-group">
+              <label for="marks1">Subject 1</label>
+              <input type="number" id="marks1" min="0" max="100" placeholder="0 - 100" />
+            </div>
+            <div class="field-group">
+              <label for="marks2">Subject 2</label>
+              <input type="number" id="marks2" min="0" max="100" placeholder="0 - 100" />
+            </div>
+            <div class="field-group">
+              <label for="marks3">Subject 3</label>
+              <input type="number" id="marks3" min="0" max="100" placeholder="0 - 100" />
+            </div>
+          </div>
+
+          <button type="submit" class="primary-btn wide-btn">Calculate Result</button>
+        </form>
+
+        <div id="result" class="result-box" aria-live="polite">
+          Enter values and click calculate to see the result.
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

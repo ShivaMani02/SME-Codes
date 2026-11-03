@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('calculatorForm');
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const num1 = parseFloat(document.getElementById('num1').value);
+                const num2 = parseFloat(document.getElementById('num2').value);
+                const num3 = parseFloat(document.getElementById('num3').value);
+                const total = num1 + num2 + num3;
+                const percentage = (total / 300) * 100; // Assuming each subject is out of 100
+                document.getElementById('result').textContent = `Percentage: ${percentage.toFixed(2)}%`;
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            max-width: 300px;
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Calculator</h1>
+    <form id="calculatorForm">
+        <label for="num1">Subject 1:</label>
+        <input type="number" id="num1" name="num1" required>
+        <br><br>
+        <label for="num2">Subject 2:</label>
+        <input type="number" id="num2" name="num2" required>
+        <br><br>
+        <label for="num3">Subject 3:</label>
+        <input type="number" id="num3" name="num3" required>
+        <br><br>
+        <h1 id="result"></h1>
+        <button type="submit">Calculate</button>
+    
+</body>
+</html>
