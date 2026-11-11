@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        h1{
+            text-align: center;
+        }
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        form{
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        label{
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"]{
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button{
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #218838;
+        }
+        p{
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Registration Form:</h1>
+    <form id="studentForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required minlength="10" maxlength="20" ><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for ="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br> 
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required><br><br>
+
+        
+        <button onclick="validateForm()" type="submit">Submit</button>
+    </form>
+
+
+    <p id="studentData"> No Data </p>
+
+    <script>
+        validateForm = () => {
+            const form = document.getElementById('studentForm');
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const phone = document.getElementById('phone').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            const phonePattern = /^\+\d{1,3}\s?\d{10}$/
+
+            if (name.length < 10 || name.length > 20) {
+                alert('Name must be between 10 and 20 characters.');
+                return false;
+            }
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+            if (!passwordPattern.test(password)) {
+                alert('Password must be at least 8 characters long and contain both letters and numbers.');
+                return false;
+            }
+
+            if (!phonePattern.test(phone)) {
+                alert('Please enter a valid phone number.');
+                return false;
+            }
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                if (form.checkValidity() === false) {
+                    alert('Please fill out the form correctly.');
+                } else {
+                    setLocally();
+                }
+            });
+        }
+        setLocally = () => {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const phone = document.getElementById('phone').value;
+
+            const studentData = {
+                name: name,
+                email: email,
+                password: password,
+                phone: phone
+            };
+
+            // var array = [];
+            // array.push(studentData);
+            // HW 11-11-26 : Array -> Student Data Object -> Stringify -> Local Storage -> Parse -> Display
+
+
+            console.log(studentData);
+            const stringData = JSON.stringify(studentData)
+            console.log(stringData);
+            localStorage.setItem('studentData', stringData);
+            alert('Student data saved successfully!');
+
+            const getData = localStorage.getItem('studentData');
+            const parsedData = JSON.parse(getData);
+            
+            const studentDataParagraph = document.getElementById('studentData');
+            studentDataParagraph.textContent = `Name: ${parsedData.name}, Email: ${parsedData.email}, Password: ${parsedData.password}, Phone: ${parsedData.phone}`;
+        }
+
+    </script>
+</body>
+</html>

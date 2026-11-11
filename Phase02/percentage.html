@@ -15,6 +15,8 @@
                 const total = num1 + num2 + num3;
                 const percentage = (total / 300) * 100; // Assuming each subject is out of 100
                 document.getElementById('result').textContent = `Percentage: ${percentage.toFixed(2)}%`;
+                document.getElementById('result').style.color = 'blue';
+
             });
         });
     </script>
@@ -56,6 +58,6 @@
         <br><br>
         <h1 id="result"></h1>
         <button type="submit">Calculate</button>
-    
+    </form>
 </body>
 </html>
