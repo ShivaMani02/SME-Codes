@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News API Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        img{
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+        }
+        div {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        h3 {
+            margin-top: 0;
+        }
+        p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>India's Top News of last month</h1>
+   <!-- [
+-{
+-"source": {
+"id": null,
+"name": "Biztoc.com"
+},
+"author": "247wallst.com",
+"title": "Here’s What Needs to Happen for Tesla’s Bull Case to Materialize and Push Past $500 Next Year",
+"description": "The post Here’s What Needs to Happen for Tesla’s Bull Case to Materialize and Push Past $500 Next Year appeared first on 24/7 Wall St..\nTesla (NASDAQ:TSLA) ended the third quarter. It finished with its largest passenger vehicle backlog in four years, and batt…",
+"url": "https://biztoc.com/x/e0aebc6a736c72d5",
+"urlToImage": "https://biztoc.com/cdn/e0aebc6a736c72d5_s.webp",
+"publishedAt": "2026-11-13T16:01:16Z",
+"content": "The post Heres What Needs to Happen for Teslas Bull Case to Materialize and Push Past $500 Next Year appeared first on 24/7 Wall St..Tesla (NASDAQ:TSLA) ended the third quarter. It finished with its … [+145 chars]"
+}, -->
+   <script>
+    const url  = "https://newsapi.org/v2/everything?q=india&from=2026-10-13&sortBy=publishedAt&apiKey=c2e557721b37476eb53802f4c906f76f";
+    async function fetchNews() {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            if(!response.ok) {
+                document.body.innerHTML = `<h2>Error fetching news: ${data.message}</h2>`;
+                return;
+            }
+            console.log(data.articles);
+            data.articles.forEach(article => {
+                const articleElement = document.createElement('div');
+                articleElement.innerHTML = `
+                    <h3>${article.title}</h3>
+                    <p>${article.description}</p>
+                    <img src="${article.urlToImage}" alt="Article Image">
+                    <a href="${article.url}" target="_blank">Read more</a>
+                `;
+                document.body.appendChild(articleElement);
+            });
+        } catch (error) {
+            console.error('Error fetching news:', error);
+        }
+    }
+    fetchNews();
+   </script>
+</body>
+</html>
