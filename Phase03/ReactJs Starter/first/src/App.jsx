@@ -6,7 +6,7 @@ function App({title, desc, price = 0}) {
   }
   return (
     <>
-      <div style={}>
+      <div>
         <div>
           {title}
         </div>
