@@ -1,10 +1,28 @@
+import Desc from "./Desc"
 
-function App() {
-
+function App({title, desc, price = 0}) {
+  function clicker(){
+    console.log("clicked")
+  }
   return (
     <>
-      <h1>My Main Website</h1>
-      <h1>Hello World!</h1>
+      <div style={}>
+        <div>
+          {title}
+        </div>
+        <div>
+          {desc}
+        </div>
+        <div>
+          {price}
+        </div>
+      </div>
+
+      <Desc clicker = {clicker}/>
+      
+      <br />
+      <br />
+      <br />
      
     </>
   )

@@ -7,7 +7,9 @@ import { Footer } from './Footer.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Navbar />
-    <App />
+    <App title="Iphone" desc="phone iphone16" price="100000" />
+    <App title="Samsung" desc="phone Samsung Ultra" price="105000" />
+    <App title="Oppo" desc="phone oppo cam"  />
     <Footer />
   </StrictMode>,
 )

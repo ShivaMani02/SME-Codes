@@ -3,8 +3,7 @@ function Navbar() {
 
   return (
     <>
-      <h1>Navbar</h1>
-      <p>theshivanshvasu</p>
+      <p>Navbar</p>
       <br />
     </>
   )
