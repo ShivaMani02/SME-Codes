@@ -1,12 +1,9 @@
-
 function Navbar() {
-
   return (
-    <>
-      <p>Navbar</p>
-      <br />
-    </>
-  )
+    <nav>
+      <h2>📱 Phone Store</h2>
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

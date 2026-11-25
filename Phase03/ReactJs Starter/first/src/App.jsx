@@ -1,31 +1,18 @@
-import Desc from "./Desc"
+import Desc from "./Desc";
 
-function App({title, desc, price = 0}) {
-  function clicker(){
-    console.log("clicked")
-  }
+function App({ title, desc, price = 0 }) {
+  const handleClick = () => {
+    console.log(`${title} clicked!`);
+  };
+
   return (
-    <>
-      <div>
-        <div>
-          {title}
-        </div>
-        <div>
-          {desc}
-        </div>
-        <div>
-          {price}
-        </div>
-      </div>
-
-      <Desc clicker = {clicker}/>
-      
-      <br />
-      <br />
-      <br />
-     
-    </>
-  )
+    <main>
+      <h2>{title}</h2>
+      <p>{desc}</p>
+      <p>Price: ₹{price}</p>
+      <Desc onAction={handleClick} />
+    </main>
+  );
 }
 
-export default App
+export default App;

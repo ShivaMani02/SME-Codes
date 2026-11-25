@@ -1,0 +1,84 @@
+/* ===== Reset & Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===== Navbar ===== */
+nav {
+  background: #333;
+  color: #fff;
+  padding: 1rem 2rem;
+}
+
+nav h2 {
+  font-size: 1.4rem;
+}
+
+/* ===== Main Content / App Cards ===== */
+main {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin: 1rem 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+main h2 {
+  margin-bottom: 0.4rem;
+  color: #222;
+}
+
+main p {
+  margin-bottom: 0.3rem;
+  color: #555;
+}
+
+/* ===== Buttons ===== */
+button {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #4a90d9;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #357abd;
+}
+
+/* ===== Inputs ===== */
+input[type="text"] {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: #4a90d9;
+}
+
+/* ===== Footer ===== */
+footer {
+  background: #eee;
+  padding: 1rem 2rem;
+  margin-top: 2rem;
+  text-align: center;
+  color: #777;
+  font-size: 0.85rem;
+}

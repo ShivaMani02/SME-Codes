@@ -1,15 +1,12 @@
-import React from 'react'
-
-const Desc = ({clicker, Children}) => {
-    if(true){
-        clicker();
-    }
+const Desc = ({ onAction, children }) => {
+  //JS
   return (
     <>
-    {Children}
-    <div>Desc</div>
+    {/* //HTML */}
+      {children}
+      <button onClick={onAction}>Click Me</button>
     </>
-  )
-}
+  );
+};
 
-export default Desc
+export default Desc;
