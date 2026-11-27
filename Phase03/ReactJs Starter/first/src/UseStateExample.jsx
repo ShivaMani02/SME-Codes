@@ -1,5 +1,3 @@
-// useState Examples - Simple Counter & Toggle
-
 import { useState } from "react";
 
 function UseStateExample() {
@@ -10,11 +8,11 @@ function UseStateExample() {
   const [isVisible, setIsVisible] = useState(true);
 
   return (
-    <div style={{ padding: "1rem", border: "2px solid blue", margin: "1rem" }}>
-      <h2>useState Examples</h2>
+    <section className="example-section">
+      <h2>🔢 useState Examples</h2>
 
       {/* Counter */}
-      <div style={{ marginBottom: "1rem" }}>
+      <div className="example-block">
         <h3>Counter: {count}</h3>
         <button onClick={() => setCount(count + 1)}>Increment</button>{" "}
         <button onClick={() => setCount(count - 1)}>Decrement</button>{" "}
@@ -22,14 +20,14 @@ function UseStateExample() {
       </div>
 
       {/* Toggle */}
-      <div>
+      <div className="example-block">
         <h3>Toggle Visibility</h3>
         <button onClick={() => setIsVisible(!isVisible)}>
           {isVisible ? "Hide" : "Show"} Text
         </button>
         {isVisible && <p>👋 Hello! I am visible right now.</p>}
       </div>
-    </div>
+    </section>
   );
 }
 
